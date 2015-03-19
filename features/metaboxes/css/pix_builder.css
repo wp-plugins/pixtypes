@@ -1,0 +1,246 @@
+/*----------------------------------------*\
+*   $GRID PAGE BUILDER
+\*----------------------------------------*/
+/**
+ * A smart grid page builder
+
+<div class="pixbuilder-grid">
+  <ul>
+    <li class="item">
+      <div class="item__controls">
+        <ul class="nav nav--controls">
+          <li>Edit</li>
+          <li>Remove</li>
+        </ul>
+      </div>
+      <div class="item_cotnent">
+        <img src="image.jpg">
+      </div>
+    </li>
+  </ul>
+</div>
+*/
+/*----------------------------------------*\
+            GRID STYLING
+\*----------------------------------------*/
+.pixbuilder-grid li {
+  position: relative; }
+  .pixbuilder-grid li.item {
+    overflow: hidden;
+    display: list-item;
+    border: 1px dashed #d9d9d9;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .pixbuilder-grid li:hover .item__controls, .pixbuilder-grid li:hover .gs-resize-handle {
+    opacity: 1; }
+  .pixbuilder-grid li.dragging {
+    opacity: 1; }
+    .pixbuilder-grid li.dragging .item__content {
+      opacity: 0.3;
+      z-index: -1; }
+  .pixbuilder-grid li.preview-holder {
+    padding: 12px;
+    opacity: 1;
+    border: 1px dashed #d9d9d9;
+    background: #f7f7f7;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+
+/*----------------------------------------*\
+            CONTENT & CONTROLS
+\*----------------------------------------*/
+.pixbuilder-grid {
+  margin-top: -10px;
+  /*ul*/
+  /*ul.nav*/ }
+  .pixbuilder-grid .item__controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 100;
+    -moz-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    -webkit-transition: all 0.15s;
+    transition: all 0.15s; }
+    .pixbuilder-grid .item__controls li {
+      display: inline-block;
+      padding: 12px 18px;
+      background: none;
+      color: white; }
+      .pixbuilder-grid .item__controls li:hover {
+        color: #0095ea; }
+      .pixbuilder-grid .item__controls li.edit {
+        padding: 0; }
+        .pixbuilder-grid .item__controls li.edit a {
+          padding: 12px 18px;
+          color: white;
+          cursor: pointer; }
+          .pixbuilder-grid .item__controls li.edit a span {
+            display: none; }
+          .pixbuilder-grid .item__controls li.edit a:before {
+            content: "\f040"; }
+          .pixbuilder-grid .item__controls li.edit a:hover {
+            color: #0095ea; }
+      .pixbuilder-grid .item__controls li.remove {
+        cursor: pointer; }
+        .pixbuilder-grid .item__controls li.remove span {
+          display: none; }
+        .pixbuilder-grid .item__controls li.remove:before {
+          content: "\f014"; }
+      .pixbuilder-grid .item__controls li.move {
+        overflow: hidden;
+        cursor: pointer;
+        cursor: -webkit-grab;
+        cursor: -moz-grab; }
+        .pixbuilder-grid .item__controls li.move:before {
+          content: "\f047"; }
+  .pixbuilder-grid .gs-resize-handle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 100%;
+    width: 36px;
+    opacity: 0.3;
+    z-index: 101;
+    background: url("../images/icon--drag-gray.svg") center center no-repeat;
+    cursor: col-resize;
+    -moz-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    -webkit-transition: all 0.15s;
+    transition: all 0.15s; }
+    .pixbuilder-grid .gs-resize-handle:hover {
+      background-image: url("../images/icon--drag-hover.svg"); }
+  .pixbuilder-grid .nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 175px;
+    background: #262526;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px; }
+  .pixbuilder-grid .item__content {
+    height: 100%;
+    padding: 12px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+
+/*----------------------------------------*\
+            BLOCK TYPES
+\*----------------------------------------*/
+/**
+ * IMAGE
+ */
+.block-type--image, .block-type--editor {
+  text-align: center; }
+  .block-type--image .block_content.empty:before, .block-type--editor .block_content.empty:before {
+    font-size: 30px;
+    color: #919191;
+    content: "\f1c5"; }
+
+/**
+ * EDITOR
+ */
+.block-type--editor {
+  text-align: left; }
+  .block-type--editor .editor_preview {
+    width: 100%;
+    padding: 12px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .block-type--editor .block_content.empty:before {
+    content: "\f031"; }
+
+/*----------------------------------------*\
+            GENERAL
+\*----------------------------------------*/
+img {
+  max-width: 100%;
+  max-height: 100%; }
+
+.icon, .pixbuilder-grid .item__controls li, .pixbuilder-grid .item__controls li.edit a, .pixbuilder-grid .item__controls li.remove, .pixbuilder-grid .item__controls li.move, .block-type--image .block_content.empty, .block-type--editor .block_content.empty, .block-type--editor .block_content.empty {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  font-family: FontAwesome;
+  text-decoration: inherit;
+  font-weight: 400;
+  font-style: normal;
+  vertical-align: top;
+  text-align: center;
+  -webkit-transition: color .1s ease-in 0;
+  transition: color .1s ease-in 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.block-type--image img, .block-type--editor img, .block-type--image .block_content.empty:before, .block-type--editor .block_content.empty:before, .block-type--editor .editor_preview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+#project_builder > h3.hndle, #project_builder > .handlediv {
+  display: none; }
+#project_builder table.cmb_metabox td {
+  border: none; }
+
+.pixbuilder-controls {
+  padding: 25px 30px 0 30px;
+  z-index: 100; }
+
+.pix_builder_editor_modal_container {
+  position: relative; }
+  .pix_builder_editor_modal_container .modal_wrapper .media-modal {
+    height: 80%;
+    max-height: 650px;
+    max-width: 800px;
+    left: 50%;
+    top: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 10000; }
+  .pix_builder_editor_modal_container .modal_wrapper .media-modal-backdrop {
+    z-index: 88; }
+  .pix_builder_editor_modal_container .modal_wrapper .media-frame-content, .pix_builder_editor_modal_container .modal_wrapper .media-frame-title, .pix_builder_editor_modal_container .modal_wrapper .media-frame-router, .pix_builder_editor_modal_container .modal_wrapper .media-frame-toolbar {
+    right: 30px;
+    left: 30px; }
+  .pix_builder_editor_modal_container .modal_wrapper .media-frame-title {
+    top: 15px; }
+  .pix_builder_editor_modal_container .modal_wrapper .media-frame-content {
+    top: 90px;
+    bottom: 80px;
+    background: none;
+    border: none; }
+  .pix_builder_editor_modal_container .modal_wrapper .modal_controls {
+    text-align: right; }
+
+.pix_builder_container .clear-all {
+  float: right;
+  color: #a00;
+  border-color: rgba(170, 0, 0, 0.62); }
+
+/* Responsive Gridster */

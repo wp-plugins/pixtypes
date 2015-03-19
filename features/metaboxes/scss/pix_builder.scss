@@ -1,0 +1,394 @@
+/*----------------------------------------*\
+*   $GRID PAGE BUILDER
+\*----------------------------------------*/
+
+@import "compass";
+
+$border   : #d9d9d9;
+$light    : #919191;
+$body     : #515150;
+$dark     : #262526;
+$accent   : #0095ea;
+
+/**
+ * A smart grid page builder
+
+<div class="pixbuilder-grid">
+  <ul>
+    <li class="item">
+      <div class="item__controls">
+        <ul class="nav nav--controls">
+          <li>Edit</li>
+          <li>Remove</li>
+        </ul>
+      </div>
+      <div class="item_cotnent">
+        <img src="image.jpg">
+      </div>
+    </li>
+  </ul>
+</div>
+*/
+
+
+
+/*----------------------------------------*\
+            GRID STYLING
+\*----------------------------------------*/
+
+.pixbuilder-grid {
+
+  li {
+    position: relative;
+
+    &.item {
+      overflow: hidden;
+      display: list-item;
+
+      // Partial Fix
+      border:1px dashed $border;
+      // padding: 12px;
+      @include box-sizing(border-box);
+    }
+
+    &:hover {
+      .item__controls, .gs-resize-handle  {
+        opacity: 1;
+      }
+    }
+
+    &.dragging {
+      opacity: 1;
+      .item__content {
+        opacity: 0.3;
+        z-index:-1;
+      }
+    }
+
+    &.preview-holder {
+      padding: 12px;
+
+      opacity: 1;
+      border:1px dashed $border;
+      background: #f7f7f7;
+
+      @include box-sizing(border-box);
+    }
+  }
+}
+
+
+
+
+
+/*----------------------------------------*\
+            CONTENT & CONTROLS
+\*----------------------------------------*/
+
+.pixbuilder-grid {
+  margin-top: -10px;
+
+  // Block Actions
+  .item__controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    z-index: 100;
+
+    @include transition (all 0.15s);
+
+    li {
+      display: inline-block;
+      padding: 12px 18px;
+
+      background: none;
+      color: white;
+
+      &:hover {
+        color: $accent;
+      }
+
+
+      // Buttons
+
+      // EDIT
+      &.edit {
+        padding: 0;
+
+        a {
+          padding: 12px 18px;
+          color: white;
+
+          cursor: pointer;
+
+          span { display: none; }
+          &:before { content: "\f040" }
+
+          &:hover { color: $accent; }
+        }
+      }
+
+      // REMOVE
+      &.remove {
+
+        cursor: pointer;
+
+        span { display: none; }
+        &:before { content: "\f014" }
+      }
+
+      // MOVE
+      &.move {
+        overflow:hidden;
+
+        cursor: pointer;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+
+        &:before { content: "\f047" }
+      }
+    }
+  }
+
+  // RESIZE
+  .gs-resize-handle {
+    position: absolute;
+    top:50%;
+    right: 0;
+    @include translateY(-50%);
+    height: 100%;
+    width: 36px;
+
+    opacity: 0.3;
+    z-index: 101;
+
+    background: url('../images/icon--drag-gray.svg') center center no-repeat;
+    // background-color: red;
+
+    cursor: col-resize;
+    @include transition(all 0.15s);
+
+    &:hover {
+      background-image: url('../images/icon--drag-hover.svg');
+    }
+  }
+
+  /*ul*/.nav {
+          position:absolute;
+          top: 50%;
+          left: 50%;
+          @include translate(-50%, -50%);
+
+          width: 175px;
+
+          background: $dark;
+          @include border-radius(6px);
+
+        }
+  /*ul.nav*/.nav--controls {
+
+            }
+
+  // Block Content
+  .item__content {
+    height: 100%;
+    padding: 12px;
+    @include box-sizing(border-box);
+  }
+}
+
+
+
+
+
+/*----------------------------------------*\
+            BLOCK TYPES
+\*----------------------------------------*/
+
+
+/**
+ * IMAGE
+ */
+.block-type--image {
+  text-align: center;
+
+  img {
+    @extend %centered;
+  }
+
+  .block_content.empty {
+
+    &:before {
+      font-size: 30px;
+      color: $light;
+      @extend %centered;
+      content: "\f1c5" }
+  }
+}
+
+
+/**
+ * EDITOR
+ */
+.block-type--editor {
+  @extend .block-type--image;
+  text-align: left;
+
+  .editor_preview {
+    width: 100%;
+    padding: 12px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    @extend %centered;
+  }
+
+  .block_content.empty {
+
+    &:before {
+      content: "\f031"
+    }
+  }
+}
+
+
+
+
+/*----------------------------------------*\
+            GENERAL
+\*----------------------------------------*/
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.icon, .pixbuilder-grid .item__controls li, .pixbuilder-grid .item__controls li.edit a, .pixbuilder-grid .item__controls li.remove, .pixbuilder-grid .item__controls li.move, .block-type--image .block_content.empty, .block-type--editor .block_content.empty {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  font-family: FontAwesome;
+  text-decoration: inherit;
+  font-weight: 400;
+  font-style: normal;
+  vertical-align: top;
+  text-align: center;
+  -webkit-transition: color .1s ease-in 0;
+  transition: color .1s ease-in 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%centered {
+    position:absolute;
+    top:50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+}
+
+// Main Wrapper
+#project_builder {
+  & > h3.hndle, & > .handlediv {
+    display: none;
+  }
+
+  table.cmb_metabox td {
+    border: none;
+  }
+}
+
+// Add Blocks Controls
+.pixbuilder-controls {
+  padding: 25px 30px 0 30px;
+  z-index: 100;
+}
+
+
+
+
+
+.pix_builder_editor_modal_container {
+  position: relative;
+
+  .modal_wrapper {
+    .media-modal {
+      height: 80%;
+      max-height: 650px;
+      max-width: 800px;
+      left: 50%;
+      top: 50%;
+      @include translate(-50%, -50%);
+      z-index: 10000;
+    }
+
+    .media-modal-content {
+      // min-height: 600px;
+    }
+
+    .media-modal-backdrop {
+      z-index: 88;
+    }
+
+    .media-frame-content, .media-frame-title, .media-frame-router, .media-frame-toolbar {
+      right: 30px;
+      left: 30px;
+    }
+    .media-frame-title {
+      top: 15px;
+    }
+    .media-frame-content {
+      top: 90px;
+      bottom: 80px;
+      background: none;
+      border: none;
+
+      .wp-editor-wrap {
+
+      }
+    }
+    .modal_controls {
+      text-align: right;
+    }
+  }
+}
+#portfolio-patterns .wp-editor-wrap * {
+  // -webkit-box-sizing: content-box;
+  // /* Safari/Chrome, other WebKit */
+  // -moz-box-sizing: content-box;
+  // /* Firefox, other Gecko */
+  // box-sizing: content-box;
+  // /* Opera/IE 8+ */
+}
+
+.pix_builder_container .clear-all {
+  float: right;
+  color: #a00;
+  border-color: rgba(170, 0, 0, 0.62);
+}
+
+
+
+/* Responsive Gridster */
+//$col-number: 6;
+//$col-w: 100%/$col-number;
+//$col-steps: 1,2,3,4,5,6;
+//$gutter: 2.35765%;
+//
+//@each $col in $col-steps {
+//  .gridster .gs-w[data-sizex="#{$col}"] {
+//    width: $col * $col-w - $gutter;
+//    margin-right: $gutter;
+//  }
+//}
+//
+//@each $col in $col-steps {
+//  .gridster .gs-w[data-col="#{$col}"] {
+//    left: ($col - 1) * $col-w;
+//  }
+//}
