@@ -7,7 +7,9 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress plugin for managing custom post types and custom meta boxes.
+A WordPress plugin for managing custom post types and custom meta boxes from a theme.
+
+Note: This plugin is addressed to developers, it doesn't do nothing if it isn't [properly configured](https://github.com/pixelgrade/pixtypes#pixytpes_config).
 
 == Description ==
 
