@@ -1,4 +1,4 @@
-=== PixTypes ===
+=== PixTypes === [![Build Status](https://travis-ci.org/pixelgrade/pixtypes.svg?branch=update)](https://travis-ci.org/pixelgrade/pixtypes)
 
 WordPress plugin for managing custom post types and custom meta boxes.
 
@@ -138,23 +138,12 @@ function theme_getting_active () {
 }
 ```
 
-=== # ===
-
-~Current Version:1.3.0~
-Dev note: use debug=true in url for some debugging
-
-=== # ===
-
-Tags: wordpress, cpt, metaboxes, custom post types, plugin
-Requires at least: 3.5.1
-Tested up to: 3.8.1
-Stable tag: 1.0.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
-=== # ===
-
 === Old Change Log  ===
+
+1.3.1
+
+Allow portfolio to be a jetpack compatible type
+Small fixes to the gallery field
 
 1.2.10
 

@@ -32,4 +32,13 @@
 		'enable_gallery_categories' => true,
 			'gallery_categories_change_archive_slug' => true,
 			'gallery_categories_new_archive_slug' => 'gallery_category',
+
+		'enable_portfolio-type' => true,
+			'portfolio-type_change_archive_slug' => true,
+			'portfolio-type_new_archive_slug' => 'project-type',
+
+		'enable_portfolio-tag' => true,
+			'portfolio-tag_change_archive_slug' => true,
+			'portfolio-tag_new_archive_slug' => 'project-tag',
+
 	); # config

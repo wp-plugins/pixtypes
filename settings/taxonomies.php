@@ -3,7 +3,9 @@
 // init display options with false
 $display_option = array(
 	'portfolio_categories' => false,
-	'gallery_categories' => false
+	'gallery_categories' => false,
+	'jetpack-portfolio-type' => false,
+	'jetpack-portfolio-tag' => false
 );
 
 $options = get_option('pixtypes_settings');
@@ -28,6 +30,80 @@ $options_config = array (
 	'label' => 'Taxonomies',
 	'options' => array()
 ); # config
+
+// Note: in case of jetpack types is very important to have the key with "-" so allover
+// there is a key with portfolio and a key they should be splited by a "-"
+
+if ( $display_option['jetpack-portfolio-type'] ) {
+
+	$options_config['options']['enable_portfolio-type'] = array(
+		'label'          => __( 'Enable Portfolio Types', 'pixtypes_txtd' ),
+		'default'        => true,
+		'type'           => 'switch',
+		'show_group'     => 'enable_portfolio-type_group',
+		'display_option' => ''
+	);
+
+	$options_config['options']['enable_portfolio-type_group'] = array(
+		'type'    => 'group',
+		'options' => array(
+			'portfolio-type_change_archive_slug'       => array(
+				'label'      => __( 'Change Portfolio Types Slug', 'pixtypes_txtd' ),
+				'desc'       => __( 'Do you want to rewrite the portfolio type slug?', 'pixtypes_txtd' ),
+				'default'    => false,
+				'type'       => 'switch',
+				'show_group' => 'portfolio-type_change_archive_slug_group'
+			),
+			'portfolio-type_change_archive_slug_group' => array(
+				'type'    => 'group',
+				'options' => array(
+					'portfolio-type_new_archive_slug' => array(
+						'label'   => __( 'New Portfolio Type Slug', 'pixtypes_txtd' ),
+						'desc'    => __( 'Change the portfolio type slug as you need it.', 'pixtypes_txtd' ),
+						'default' => 'project-type',
+						'type'    => 'text',
+					),
+				),
+			),
+		),
+	);
+}
+
+
+if ( $display_option['jetpack-portfolio-tag'] ) {
+
+	$options_config['options']['enable_portfolio-tag'] = array(
+		'label'          => __( 'Enable Portfolio Tag', 'pixtypes_txtd' ),
+		'default'        => true,
+		'type'           => 'switch',
+		'show_group'     => 'enable_portfolio-tag_group',
+		'display_option' => ''
+	);
+
+	$options_config['options']['enable_portfolio-tag_group'] = array(
+		'type'    => 'group',
+		'options' => array(
+			'portfolio-tag_change_archive_slug'       => array(
+				'label'      => __( 'Change Portfolio Tag Slug', 'pixtypes_txtd' ),
+				'desc'       => __( 'Do you want to rewrite the portfolio tag slug?', 'pixtypes_txtd' ),
+				'default'    => false,
+				'type'       => 'switch',
+				'show_group' => 'portfolio-tag_change_archive_slug_group'
+			),
+			'portfolio-tag_change_archive_slug_group' => array(
+				'type'    => 'group',
+				'options' => array(
+					'portfolio-tag_new_archive_slug' => array(
+						'label'   => __( 'New Portfolio Tag Slug', 'pixtypes_txtd' ),
+						'desc'    => __( 'Change the portfolio tag slug as you need it.', 'pixtypes_txtd' ),
+						'default' => 'project-tag',
+						'type'    => 'text',
+					),
+				),
+			),
+		),
+	);
+}
 
 if ( $display_option['portfolio_categories'] ) {
 
@@ -62,7 +138,6 @@ if ( $display_option['portfolio_categories'] ) {
 			),
 		),
 	);
-
 }
 
 if ( $display_option['gallery_categories'] ) {
@@ -97,7 +172,6 @@ if ( $display_option['gallery_categories'] ) {
 			),
 		),
 	);
-
 }
 
 return $options_config;
