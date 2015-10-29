@@ -970,7 +970,7 @@ function cmb_scripts( $hook ) {
 		wp_register_script( 'gridster', CMB_META_BOX_URL . 'js/jquery.gridster.js' );
 		wp_register_script( 'pix_builder', CMB_META_BOX_URL . 'js/pix_builder.js', array( 'gridster' ), $plugin_version );
 		wp_localize_script( 'pix_builder', 'l18n_pix_builder', array(
-			'set_image' => __( 'Set Image', 'pixtypes_txtd' ),
+			'set_image' => __( 'Set Image', 'pixtypes' ),
 		) );
 		wp_register_script( 'gmap_pins', CMB_META_BOX_URL . 'js/gmap_pins.js', array(), $plugin_version );
 
@@ -1134,10 +1134,17 @@ function ajax_pixgallery_preview() {
 		exit;
 	}
 
+	$ids = rtrim($ids, ',');
 	$ids = explode( ',', $ids );
 
+	$size = 'thumbnail';
+
+	if ( count( $ids ) === 1 ) {
+		$size = 'medium';
+	}
+
 	foreach ( $ids as $id ) {
-		$attach = wp_get_attachment_image_src( $id, 'thumbnail', false );
+		$attach = wp_get_attachment_image_src( $id, $size, false );
 
 		$result["output"] .= '<li><img src="' . $attach[0] . '" /></li>';
 	}

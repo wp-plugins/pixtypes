@@ -62,7 +62,7 @@
 
 			init: function () {
 				pixgallery_ajax_preview();
-				$('#pixgallery').on('click', '.open_pixgallery', function (e) {
+				$('.pixgallery_field').on('click', '.open_pixgallery', function (e) {
 					e.preventDefault();
 					wp.media.EditPixGallery.frame().open();
 				});
@@ -133,11 +133,15 @@
 					var result = JSON.parse(response);
 					if (result.success) {
 						$pixgallery_ul.html(result.output);
+
+						pixgallery_review_number_of_images( $('#pixgallery') );
+						$(document ).trigger('pixgallery_ajax_preview');
 					}
 				}
 			});
 		} else {
 			$pixgallery_ul.html('');
+			pixgallery_review_number_of_images( $('#pixgallery') );
 		}
 	};
 
@@ -173,7 +177,7 @@
 	});
 
 	// Clear gallery
-	$('#pixgallery').on('click', '.clear_gallery', function (e) {
+	$('.pixgallery_field').on('click', '.clear_gallery', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 
@@ -189,4 +193,22 @@
 		}
 	});
 
+	var pixgallery_review_number_of_images = function( $this ) {
+		var $gallery = $this.children('ul'),
+			nr_of_images = $gallery.children('li').length,
+			metabox_class = '',
+			options_container = $('.cmb-type-gallery');
+
+		if ( nr_of_images < 1 ) {
+			metabox_class = 'no-items';
+		} else {
+			metabox_class = 'has-items';
+		}
+
+		if ( metabox_class !== '' ) {
+			$this
+				.removeClass('no-items has-items hidden')
+				.addClass(metabox_class);
+		}
+	};
 })(jQuery);
