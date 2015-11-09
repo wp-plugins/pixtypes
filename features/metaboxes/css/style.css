@@ -2778,7 +2778,8 @@ div.time-picker li.selected {
   padding: 10px 2px; }
 
 #pixgallery, #pixvideos {
-  position: relative; }
+  position: relative;
+  min-height: 84px; }
   #pixgallery > ul, #pixvideos > ul {
     padding-top: 0; }
     #pixgallery > ul li, #pixvideos > ul li {
@@ -2789,6 +2790,11 @@ div.time-picker li.selected {
         display: block;
         width: 100%;
         border-radius: 4px; }
+    #postbox-container-2 #pixgallery > ul, #postbox-container-2 #pixvideos > ul {
+      justify-content: flex-start; }
+      #postbox-container-2 #pixgallery > ul li, #postbox-container-2 #pixvideos > ul li {
+        width: 77.5px;
+        margin-right: 8px; }
   #pixgallery .open_pixgallery, #pixgallery .open_pixvideos, #pixvideos .open_pixgallery, #pixvideos .open_pixvideos {
     width: 100%;
     height: 100%;
@@ -2905,7 +2911,6 @@ img {
   display: inline-block;
   font-size: 20px;
   line-height: 1;
-  font-family: FontAwesome;
   text-decoration: inherit;
   font-weight: 400;
   font-style: normal;
